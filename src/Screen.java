@@ -87,19 +87,41 @@ public class Screen {
         selectProductMenu(productList);
     }
 
-    private void selectProductMenu(ArrayList<Product> productList) {
+    private void selectProductMenu(ArrayList<Product> productList){
         int input = scan.nextInt();
         if(input < 1 || input > productList.size()) {
             throw new BadInputException("잘못된 입력값: " + input);
         }
         Product product = productList.get(input - 1);
         System.out.printf("%-20s | W %.1f | %s\n", product.getName(), product.getPrice(), product.getDescription());
+
+        if(product.hasOptions()) {
+            product = selectOption(product);
+        }
+
         System.out.println("위 메뉴를 장바구니에 추가하시겠습니까?");
         System.out.println("1. 확인     2. 취소");
 
         if(scan.nextInt() == 1) {
             order.add(product);
         }
+    }
+
+    private Product selectOption(Product product) {
+        System.out.println("위 메뉴의 어떤 옵션으로 추가하시겠습니까?");
+        List<Option> options = product.getOptions();
+        for(int i = 0; i < options.size(); i++) {
+            Option option = options.get(i);
+            System.out.printf("%d. %s(W %.1f)\t", (i + 1), option.getTag(), option.getPrice());
+        }
+        System.out.println();
+        int input = scan.nextInt();
+        if(input < 1 || input > options.size()) {
+            throw new BadInputException("잘못된 입력값: " + input);
+        }
+        Product option = options.get(input - 1);
+        System.out.printf("%-20s | W %.1f | %s\n", option.getName(), option.getPrice(), option.getDescription());
+        return option;
     }
 
     private void printMainMenu() {

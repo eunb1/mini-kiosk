@@ -17,7 +17,13 @@ public class Kiosk {
         burgerList.add(new Product("Quarter Pounder", 5.5, "1/4파운드 비프와 치즈 두 장이 들어간 버거"));
         burgerList.add(new Product("Shanghai Burger", 5.2, "매콤한 시즈닝을 입힌 100% 닭가슴 통살 버거"));
         burgerList.add(new Product("Bulgogi Burger", 2.3, "한국인 입맛에 딱 맛는 불고기 소스가 들어간 버거"));
-        burgerList.add(new Product("Double Cheeseburger", 4.7, "100% 순 쇠고기 패티 두 개와 치즈가 함께한 버거"));
+
+        // 치즈 버거 메뉴에만 세 가지 옵션 추가
+        ArrayList<Option> cheeseburgerOptions = new ArrayList<>();
+        cheeseburgerOptions.add(new Option("Single", "Cheeseburger(Single)", 2.7, "순 쇠고기 패티 한 장"));
+        cheeseburgerOptions.add(new Option("Double", "Cheeseburger(Double)", 4.7, "순 쇠고기 패티 무려 두 장"));
+        cheeseburgerOptions.add(new Option("Triple", "Cheeseburger(Triple)", 5.8, "순 쇠고기 패티 놀랍게도 세 장"));
+        burgerList.add(new Product("Cheeseburger", 4.7, "100% 순 쇠고기 패티와 치즈가 함께한 버거", cheeseburgerOptions));
         menuMap.put("Burgers", burgerList);
 
         ArrayList<Product> sideList = new ArrayList<>();
