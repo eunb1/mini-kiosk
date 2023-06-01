@@ -29,6 +29,15 @@ public class Screen {
     private void printTotalSales() {
         System.out.println("[ 총 판매금액 현황 ]");
         System.out.printf("현재까지 총 판매된 금액은 [ W %.1f ] 입니다.\n\n", order.getTotalSales());
+
+        System.out.println("[ 총 판매상품 목록 현황 ]");
+        System.out.println("현재까지 총 판매된 상품 목록은 아래와 같습니다.");
+        for(Map.Entry<Product, Integer> entry : order.getSalesRecord().entrySet()) {
+            Product product = entry.getKey();
+            int quantity = entry.getValue();
+            System.out.printf("%-20s | W %.1f | %d개\n", product.getName(), product.getPrice(), quantity);
+        }
+        System.out.println();
         System.out.println("1. 돌아가기");
         if(scan.nextInt() == 1) {
             return;
