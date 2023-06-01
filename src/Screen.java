@@ -17,11 +17,21 @@ public class Screen {
             printMainMenu();
             int input = scan.nextInt();
             switch (input) {
+                case 0 -> printTotalSales();
                 case 1, 2, 3, 4 -> printProductMenu(input);
                 case 5 -> proceedOrder();
                 case 6 -> cancelOrder();
                 default -> throw new BadInputException("잘못된 입력값: " + input);
             }
+        }
+    }
+
+    private void printTotalSales() {
+        System.out.println("[ 총 판매금액 현황 ]");
+        System.out.printf("현재까지 총 판매된 금액은 [ W %.1f ] 입니다.\n\n", order.getTotalSales());
+        System.out.println("1. 돌아가기");
+        if(scan.nextInt() == 1) {
+            return;
         }
     }
 
@@ -51,7 +61,7 @@ public class Screen {
         System.out.println("1. 주문     2. 메뉴판");
 
         if(scan.nextInt() == 1) {
-            order.confirm(waitingNumber++);
+            order.confirm(totalAmount, waitingNumber++);
         }
     }
 

@@ -2,10 +2,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Order {
+    private double totalSales = 0.0;
     private final Map<Product, Integer> orderMap = new HashMap<>();
 
     public Map<Product, Integer> getOrderMap() {
         return orderMap;
+    }
+
+    public double getTotalSales() {
+        return totalSales;
     }
 
     public void add(Product product) {
@@ -18,7 +23,8 @@ public class Order {
         System.out.println("진행하던 주문이 취소되었습니다.\n");
     }
 
-    public void confirm(int waitingNumber) throws InterruptedException {
+    public void confirm(double totalAmount, int waitingNumber) throws InterruptedException {
+        totalSales += totalAmount;
         orderMap.clear();
         System.out.println("주문이 완료되었습니다!\n");
         System.out.printf("대기 번호는 [ %d ] 번 입니다.\n", waitingNumber);
