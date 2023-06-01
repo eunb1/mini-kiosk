@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 public class Screen {
     private static int waitingNumber = 1;
@@ -40,9 +38,11 @@ public class Screen {
         double totalAmount = 0.0;
         System.out.println("아래와 같이 주문하시겠습니까?\n");
         System.out.println("[ Orders ]");
-        for(Product product : order.getOrderList()) {
-            totalAmount += product.getPrice();
-            System.out.printf("%-20s | W %.1f | %s\n", product.getName(), product.getPrice(), product.getDescription());
+        for(Map.Entry<Product, Integer> entry : order.getOrderMap().entrySet()) {
+            Product product = entry.getKey();
+            int quantity = entry.getValue();
+            totalAmount += product.getPrice() * quantity;
+            System.out.printf("%-20s | W %.1f | %d개 | %s\n", product.getName(), product.getPrice(), quantity, product.getDescription());
         }
         System.out.println();
         System.out.println("[ Total ]");
